@@ -1,4 +1,4 @@
-# Inventory Management System - Git Ignore File
+# Simple Inventory Management System (Web Application)
 
 # Python cache files
 __pycache__/
@@ -9,6 +9,14 @@ __pycache__/
 .venv/
 venv/
 env/
+
+# Flask specific
+instance/
+.webassets-cache
+
+# Environment variables
+.env
+.flaskenv
 
 # IDE files
 .vscode/
@@ -29,13 +37,5 @@ Thumbs.db
 *.log
 *.tmp
 
-# Flask specific
-instance/
-.webassets-cache
-
-# Environment variables
-.env
-.flaskenv
-
-# Don't ignore the sample data file, but ignore the actual runtime data
+# Runtime data (don't commit actual inventory data)
 inventory_data.json
