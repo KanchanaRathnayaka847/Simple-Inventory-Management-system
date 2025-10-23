@@ -1,0 +1,20 @@
+{
+  "P001": {
+    "name": "Apples",
+    "unit": "kg",
+    "price": 2.5,
+    "quantity": 10.0
+  },
+  "P002": {
+    "name": "Notebooks",
+    "unit": "pcs",
+    "price": 1.25,
+    "quantity": 50.0
+  },
+  "P003": {
+    "name": "Milk",
+    "unit": "liters",
+    "price": 1.8,
+    "quantity": 15.0
+  }
+}

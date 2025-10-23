@@ -1,0 +1,33 @@
+# Inventory Management System - Git Ignore File
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Application specific
+*.log
+*.tmp
+
+# Don't ignore the sample data file, but ignore the actual runtime data
+inventory_data.json
