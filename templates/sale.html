@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}Record Sale - Simple Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2><i class="fas fa-minus-circle"></i> Record Sale</h2>
+        <p class="text-muted">Process sales and update inventory quantities</p>
+    </div>
+</div>
+
+{% if available_products %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-shopping-cart"></i> Sale Form</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="saleForm">
+                    <div class="mb-3">
+                        <label for="product_id" class="form-label">Select Product to Sell</label>
+                        <select class="form-control" id="product_id" name="product_id" required>
+                            <option value="">Choose a product...</option>
+                            {% for product_id, product in available_products.items() %}
+                            <option value="{{ product_id }}" 
+                                    data-name="{{ product.name }}"
+                                    data-unit="{{ product.unit }}"
+                                    data-price="{{ product.price }}"
+                                    data-quantity="{{ product.quantity }}"
+                                    {% if request.args.get('product_id') == product_id %}selected{% endif %}>
+                                {{ product_id }} - {{ product.name }} ({{ product.quantity }} {{ product.unit }} available)
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div id="productDetails" class="alert alert-info" style="display: none;">
+                        <h6><i class="fas fa-info-circle"></i> Product Details</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>Name:</strong> <span id="detailName"></span></p>
+                                <p class="mb-1"><strong>Available:</strong> <span id="detailQuantity"></span> <span id="detailUnit"></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>Price per unit:</strong> $<span id="detailPrice"></span></p>
+                                <p class="mb-1"><strong>Total value:</strong> $<span id="detailTotalValue"></span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Sale Quantity</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-shopping-cart"></i></span>
+                            <input type="number" class="form-control" id="quantity" name="quantity" 
+                                   step="0.01" min="0.01" required>
+                            <span class="input-group-text" id="saleUnit">units</span>
+                        </div>
+                        <div class="form-text">
+                            <span id="maxQuantityText"></span>
+                        </div>
+                    </div>
+
+                    <div id="saleCalculation" class="card border-success mb-3" style="display: none;">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0"><i class="fas fa-calculator"></i> Sale Calculation</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Selling:</strong> <span id="calcQuantity"></span> <span id="calcUnit"></span></p>
+                                    <p class="mb-1"><strong>Price per unit:</strong> $<span id="calcPrice"></span></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong>Total Sale Value:</strong> <span class="h5 text-success">$<span id="calcTotal"></span></span></p>
+                                    <p class="mb-1"><strong>Remaining stock:</strong> <span id="calcRemaining"></span> <span id="calcRemainingUnit"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning btn-lg" id="submitSale" disabled>
+                            <i class="fas fa-shopping-cart"></i> Process Sale
+                        </button>
+                        <a href="{{ url_for('view_inventory') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-list"></i> View Inventory
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h6><i class="fas fa-boxes"></i> Available Products</h6>
+            </div>
+            <div class="card-body" style="max-height: 500px; overflow-y: auto;">
+                {% for product_id, product in available_products.items() %}
+                <div class="card mb-2 product-item" data-product-id="{{ product_id }}">
+                    <div class="card-body p-2">
+                        <h6 class="card-title mb-1">{{ product.name }}</h6>
+                        <small class="text-muted">
+                            ID: {{ product_id }}<br>
+                            Stock: {{ product.quantity }} {{ product.unit }}<br>
+                            Price: ${{ "%.2f"|format(product.price) }}<br>
+                            Value: ${{ "%.2f"|format(product.price * product.quantity) }}
+                        </small>
+                        <button type="button" class="btn btn-sm btn-outline-warning mt-1 w-100 select-for-sale" 
+                                data-product-id="{{ product_id }}">
+                            <i class="fas fa-shopping-cart"></i> Sell This
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6><i class="fas fa-exclamation-triangle"></i> Sale Guidelines</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled small">
+                    <li><i class="fas fa-check text-success"></i> Only products with available stock can be sold</li>
+                    <li><i class="fas fa-check text-success"></i> Sale quantity cannot exceed available stock</li>
+                    <li><i class="fas fa-check text-success"></i> Products with 0 stock will be removed automatically</li>
+                    <li><i class="fas fa-check text-success"></i> All sales are final and update inventory immediately</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="text-center">
+    <div class="card">
+        <div class="card-body py-5">
+            <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
+            <h4>No Products Available for Sale</h4>
+            <p class="text-muted">There are no products in your inventory. Add some products first!</p>
+            <a href="{{ url_for('record_purchase') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Products
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Product selection change
+    $('#product_id').change(function() {
+        updateProductDetails();
+        calculateSale();
+    });
+
+    // Quantity input change
+    $('#quantity').on('input', function() {
+        calculateSale();
+    });
+
+    // Select product for sale
+    $('.select-for-sale').click(function() {
+        var productId = $(this).data('product-id');
+        $('#product_id').val(productId);
+        updateProductDetails();
+        calculateSale();
+    });
+
+    function updateProductDetails() {
+        var selectedOption = $('#product_id option:selected');
+        if (selectedOption.val()) {
+            var name = selectedOption.data('name');
+            var unit = selectedOption.data('unit');
+            var price = selectedOption.data('price');
+            var quantity = selectedOption.data('quantity');
+            var totalValue = (price * quantity).toFixed(2);
+
+            $('#detailName').text(name);
+            $('#detailUnit, #saleUnit').text(unit);
+            $('#detailPrice').text(price.toFixed(2));
+            $('#detailQuantity').text(quantity);
+            $('#detailTotalValue').text(totalValue);
+            $('#maxQuantityText').text('Maximum available: ' + quantity + ' ' + unit);
+
+            $('#productDetails').show();
+            $('#quantity').attr('max', quantity);
+        } else {
+            $('#productDetails').hide();
+            $('#saleCalculation').hide();
+            $('#submitSale').prop('disabled', true);
+        }
+    }
+
+    function calculateSale() {
+        var selectedOption = $('#product_id option:selected');
+        var saleQuantity = parseFloat($('#quantity').val()) || 0;
+
+        if (selectedOption.val() && saleQuantity > 0) {
+            var name = selectedOption.data('name');
+            var unit = selectedOption.data('unit');
+            var price = selectedOption.data('price');
+            var availableQuantity = selectedOption.data('quantity');
+
+            if (saleQuantity <= availableQuantity) {
+                var totalSale = (price * saleQuantity).toFixed(2);
+                var remainingStock = (availableQuantity - saleQuantity).toFixed(2);
+
+                $('#calcQuantity').text(saleQuantity);
+                $('#calcUnit, #calcRemainingUnit').text(unit);
+                $('#calcPrice').text(price.toFixed(2));
+                $('#calcTotal').text(totalSale);
+                $('#calcRemaining').text(remainingStock);
+
+                $('#saleCalculation').show();
+                $('#submitSale').prop('disabled', false);
+
+                // Add visual feedback for valid quantity
+                $('#quantity').removeClass('is-invalid').addClass('is-valid');
+            } else {
+                $('#saleCalculation').hide();
+                $('#submitSale').prop('disabled', true);
+                $('#quantity').removeClass('is-valid').addClass('is-invalid');
+            }
+        } else {
+            $('#saleCalculation').hide();
+            $('#submitSale').prop('disabled', true);
+            $('#quantity').removeClass('is-valid is-invalid');
+        }
+    }
+
+    // Initial update if product is pre-selected
+    if ($('#product_id').val()) {
+        updateProductDetails();
+        calculateSale();
+    }
+});
+</script>
+{% endblock %}

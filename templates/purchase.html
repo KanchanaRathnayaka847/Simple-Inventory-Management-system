@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Record Purchase - Simple Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2><i class="fas fa-plus-circle"></i> Record Purchase</h2>
+        <p class="text-muted">Add new products or increase quantity of existing products</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-shopping-bag"></i> Purchase Form</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="purchaseForm">
+                    <div class="mb-3">
+                        <label for="product_id" class="form-label">Product ID</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-barcode"></i></span>
+                            <input type="text" class="form-control" id="product_id" name="product_id" 
+                                   value="{{ request.args.get('product_id', '') }}" required>
+                            <button type="button" class="btn btn-outline-secondary" id="checkProduct">
+                                <i class="fas fa-search"></i> Check
+                            </button>
+                        </div>
+                        <div class="form-text">Enter a unique product ID or select from existing products below</div>
+                    </div>
+
+                    <div id="existingProductInfo" class="alert alert-info" style="display: none;">
+                        <h6><i class="fas fa-info-circle"></i> Existing Product Found</h6>
+                        <p id="existingProductDetails"></p>
+                    </div>
+
+                    <div id="newProductFields">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Product Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="unit" class="form-label">Measuring Unit</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-ruler"></i></span>
+                                        <select class="form-control" id="unit" name="unit">
+                                            <option value="">Select Unit</option>
+                                            <option value="pcs">Pieces (pcs)</option>
+                                            <option value="kg">Kilograms (kg)</option>
+                                            <option value="g">Grams (g)</option>
+                                            <option value="liters">Liters</option>
+                                            <option value="ml">Milliliters (ml)</option>
+                                            <option value="boxes">Boxes</option>
+                                            <option value="bottles">Bottles</option>
+                                            <option value="meters">Meters</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price per Unit ($)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                        <input type="number" class="form-control" id="price" name="price" 
+                                               step="0.01" min="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Purchase Quantity</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-boxes"></i></span>
+                            <input type="number" class="form-control" id="quantity" name="quantity" 
+                                   step="0.01" min="0.01" required>
+                            <span class="input-group-text" id="quantityUnit">units</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-plus"></i> Record Purchase
+                        </button>
+                        <a href="{{ url_for('view_inventory') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-list"></i> View Inventory
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        {% if existing_products %}
+        <div class="card">
+            <div class="card-header">
+                <h6><i class="fas fa-list"></i> Existing Products</h6>
+            </div>
+            <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                {% for product_id, product in existing_products.items() %}
+                <div class="card mb-2 existing-product-item" data-product-id="{{ product_id }}">
+                    <div class="card-body p-2">
+                        <h6 class="card-title mb-1">{{ product.name }}</h6>
+                        <small class="text-muted">
+                            ID: {{ product_id }}<br>
+                            Stock: {{ product.quantity }} {{ product.unit }}<br>
+                            Price: ${{ "%.2f"|format(product.price) }}
+                        </small>
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-1 w-100 select-product" 
+                                data-product-id="{{ product_id }}">
+                            <i class="fas fa-plus"></i> Add Stock
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6><i class="fas fa-info-circle"></i> Quick Tips</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled small">
+                    <li><i class="fas fa-check text-success"></i> For existing products, just enter Product ID and quantity</li>
+                    <li><i class="fas fa-check text-success"></i> For new products, fill in all details</li>
+                    <li><i class="fas fa-check text-success"></i> Use clear, descriptive product names</li>
+                    <li><i class="fas fa-check text-success"></i> Choose appropriate measuring units</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+    // Check if product exists when typing
+    $('#product_id').on('blur', function() {
+        checkProductExists();
+    });
+
+    // Check product button
+    $('#checkProduct').click(function() {
+        checkProductExists();
+    });
+
+    // Select existing product
+    $('.select-product').click(function() {
+        var productId = $(this).data('product-id');
+        $('#product_id').val(productId);
+        checkProductExists();
+    });
+
+    function checkProductExists() {
+        var productId = $('#product_id').val().trim();
+        if (productId) {
+            $.ajax({
+                url: '/api/product/' + productId,
+                type: 'GET',
+                success: function(data) {
+                    // Product exists
+                    $('#existingProductInfo').show();
+                    $('#existingProductDetails').html(
+                        '<strong>' + data.name + '</strong><br>' +
+                        'Current stock: ' + data.quantity + ' ' + data.unit + '<br>' +
+                        'Price: $' + data.price.toFixed(2) + ' per ' + data.unit
+                    );
+                    $('#newProductFields input, #newProductFields select').prop('required', false);
+                    $('#newProductFields').hide();
+                    $('#quantityUnit').text(data.unit);
+                },
+                error: function() {
+                    // Product doesn't exist
+                    $('#existingProductInfo').hide();
+                    $('#newProductFields input, #newProductFields select').prop('required', true);
+                    $('#newProductFields').show();
+                    $('#quantityUnit').text('units');
+                }
+            });
+        }
+    }
+
+    // Update unit display when unit is selected
+    $('#unit').change(function() {
+        var unit = $(this).val();
+        $('#quantityUnit').text(unit || 'units');
+    });
+
+    // Initial check if product_id is pre-filled
+    if ($('#product_id').val()) {
+        checkProductExists();
+    }
+});
+</script>
+{% endblock %}

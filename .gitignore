@@ -29,5 +29,13 @@ Thumbs.db
 *.log
 *.tmp
 
+# Flask specific
+instance/
+.webassets-cache
+
+# Environment variables
+.env
+.flaskenv
+
 # Don't ignore the sample data file, but ignore the actual runtime data
 inventory_data.json

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}View Inventory - Simple Inventory Management System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2><i class="fas fa-list"></i> Total Inventory</h2>
+        <p class="text-muted">Overview of all products in your inventory</p>
+    </div>
+</div>
+
+{% if products %}
+<div class="row mb-3">
+    <div class="col-md-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5>Total Products</h5>
+                        <h3>{{ total_products }}</h3>
+                    </div>
+                    <div>
+                        <i class="fas fa-boxes fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5>Total Value</h5>
+                        <h3>${{ "%.2f"|format(total_value) }}</h3>
+                    </div>
+                    <div>
+                        <i class="fas fa-dollar-sign fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5>Low Stock Items</h5>
+                        <h3>{{ products.values()|selectattr('quantity', 'lt', 10)|list|length }}</h3>
+                    </div>
+                    <div>
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-table"></i> Product List</h5>
+        <div>
+            <a href="{{ url_for('record_purchase') }}" class="btn btn-success btn-sm">
+                <i class="fas fa-plus"></i> Add Product
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                        <th>Price per Unit</th>
+                        <th>Quantity</th>
+                        <th>Total Value</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product_id, product in products.items() %}
+                    <tr>
+                        <td><strong>{{ product_id }}</strong></td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.unit }}</td>
+                        <td>${{ "%.2f"|format(product.price) }}</td>
+                        <td>
+                            <span class="badge {% if product.quantity < 10 %}bg-warning{% elif product.quantity < 5 %}bg-danger{% else %}bg-success{% endif %}">
+                                {{ product.quantity }}
+                            </span>
+                        </td>
+                        <td>${{ "%.2f"|format(product.price * product.quantity) }}</td>
+                        <td>
+                            {% if product.quantity < 5 %}
+                                <span class="badge bg-danger">Critical</span>
+                            {% elif product.quantity < 10 %}
+                                <span class="badge bg-warning">Low Stock</span>
+                            {% else %}
+                                <span class="badge bg-success">In Stock</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ url_for('record_purchase') }}?product_id={{ product_id }}" 
+                               class="btn btn-sm btn-outline-success" title="Add Stock">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <a href="{{ url_for('record_sale') }}?product_id={{ product_id }}" 
+                               class="btn btn-sm btn-outline-warning" title="Record Sale">
+                                <i class="fas fa-minus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="text-center">
+    <div class="card">
+        <div class="card-body py-5">
+            <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+            <h4>No Products in Inventory</h4>
+            <p class="text-muted">Your inventory is empty. Start by adding some products!</p>
+            <a href="{{ url_for('record_purchase') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Your First Product
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-refresh every 30 seconds
+setTimeout(function() {
+    location.reload();
+}, 30000);
+</script>
+{% endblock %}

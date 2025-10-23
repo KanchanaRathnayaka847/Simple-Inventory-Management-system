@@ -1,0 +1,241 @@
+/* Custom CSS for Simple Inventory Management System */
+
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    transform: translateY(-2px);
+}
+
+/* Cards */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Jumbotron */
+.jumbotron {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border-radius: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-lg {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+/* Form Controls */
+.form-control {
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    transform: scale(1.02);
+}
+
+/* Input Groups */
+.input-group-text {
+    background-color: #e9ecef;
+    border: 2px solid #e9ecef;
+    color: #495057;
+    font-weight: 500;
+}
+
+/* Tables */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #343a40;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 15px;
+}
+
+.table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Badges */
+.badge {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+    color: #0c5460;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+}
+
+/* Statistics Cards */
+.card.bg-info, .card.bg-success, .card.bg-warning {
+    border: none;
+    background: linear-gradient(135deg, var(--bs-info), var(--bs-info-dark)) !important;
+}
+
+.card.bg-success {
+    background: linear-gradient(135deg, var(--bs-success), var(--bs-success-dark)) !important;
+}
+
+.card.bg-warning {
+    background: linear-gradient(135deg, var(--bs-warning), var(--bs-warning-dark)) !important;
+}
+
+/* Product Items */
+.product-item, .existing-product-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.product-item:hover, .existing-product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+    border-top: 3px solid #007bff;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card, .alert {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Loading Spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .jumbotron h1 {
+        font-size: 2rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .btn-lg {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Custom Status Indicators */
+.status-critical {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.status-low {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.status-good {
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Form Validation */
+.is-valid {
+    border-color: #28a745;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

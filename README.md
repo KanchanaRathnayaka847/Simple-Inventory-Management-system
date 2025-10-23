@@ -1,32 +1,71 @@
 # Simple Inventory Management System
 
-A Python-based inventory management system that allows you to track product inventory, record purchases, and record sales.
+A Python-based inventory management system with both **console** and **web** interfaces that allows you to track product inventory, record purchases, and record sales.
 
-## Features
+## 🌟 Features
 
 - **View Total Inventory**: Display all products with ID, name, measuring unit, price, and quantity
 - **Record Purchases**: Add new products or increase quantity of existing products
 - **Record Sales**: Decrease inventory quantity when products are sold
 - **Data Persistence**: All data is saved to a JSON file for persistence between sessions
+- **Web Interface**: Modern, responsive web interface accessible through any browser
+- **Real-time Updates**: Dynamic calculations and stock validation
+- **Mobile Friendly**: Responsive design works on desktop, tablet, and mobile devices
 
-## Requirements
+## 📋 Requirements
 
 - Python 3.6 or higher
-- No external dependencies required (uses only built-in Python modules)
+- Flask 3.0.0 (for web interface)
+- Modern web browser (for web interface)
 
-## Installation
+## 🚀 Installation
 
-1. Clone this repository or download the files
-2. Navigate to the project directory
-3. Run the application:
+1. Clone this repository:
+```bash
+git clone https://github.com/KanchanaRathnayaka847/Simple-Inventory-Management-system.git
+cd Simple-Inventory-Management-system
+```
 
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Choose your interface:
+
+### Console Version
 ```bash
 python main.py
 ```
 
-## Usage
+### Web Version (Recommended)
+```bash
+python app.py
+```
+Then open your browser and go to: **http://localhost:5000**
 
-### Main Menu Options
+## 💻 Usage
+
+### Web Interface (Recommended)
+
+The web interface provides a modern, user-friendly experience with:
+
+1. **Home Dashboard**: Overview of system features and quick navigation
+2. **Inventory View**: 
+   - Interactive table with all products
+   - Real-time stock status indicators
+   - Total inventory value calculations
+   - Low stock warnings
+3. **Purchase Recording**: 
+   - Smart form that detects existing products
+   - Auto-complete for product details
+   - Quantity validation
+4. **Sales Processing**: 
+   - Product selection dropdown
+   - Real-time sale calculations
+   - Stock availability validation
+
+### Console Interface
 
 1. **View Total Inventory**
    - Displays all products in a formatted table
@@ -43,9 +82,6 @@ python main.py
    - Inventory quantity decreases automatically
    - Products are removed when quantity reaches 0
 
-4. **Exit**
-   - Saves all data and closes the application
-
 ### Data Structure
 
 Each product in the inventory contains:
@@ -61,40 +97,47 @@ Each product in the inventory contains:
 - Data is automatically saved after each purchase or sale
 - The JSON file is created automatically on first run
 
-## Example Usage
+## 📱 Screenshots & Demo
 
-```
-=================================================
-        INVENTORY MANAGEMENT SYSTEM
-=================================================
-1. View Total Inventory
-2. Record Purchase
-3. Record Sale
-4. Exit
--------------------------------------------------
-Enter your choice (1-4): 2
+### Web Interface
+- **Home Page**: Clean dashboard with feature overview
+- **Inventory View**: Professional table with status indicators
+- **Purchase Form**: Smart form with existing product detection
+- **Sales Form**: Real-time calculations and validation
 
-==================================================
-               RECORD PURCHASE
-==================================================
-Enter Product ID: P001
-New Product - Please enter details:
-Product Name: Apples
-Measuring Unit (e.g., kg, pcs, liters): kg
-Price per unit: $2.50
-Purchase quantity (kg): 10
-Added new product to inventory: Apples
-Purchase recorded successfully!
-```
+Access the web interface at: `http://localhost:5000`
 
-## File Structure
+## 🗂️ File Structure
 
 ```
 inventory-management-system/
-├── main.py                 # Main application file
-├── inventory_data.json     # Data storage file (created automatically)
-└── README.md              # This documentation file
+├── app.py                  # Flask web application
+├── main.py                 # Console application
+├── requirements.txt        # Python dependencies
+├── inventory_data.json     # Data storage (created automatically)
+├── templates/              # HTML templates for web interface
+│   ├── base.html          # Base template with navigation
+│   ├── index.html         # Home page
+│   ├── inventory.html     # Inventory view page
+│   ├── purchase.html      # Purchase recording page
+│   └── sale.html          # Sales recording page
+├── static/
+│   └── css/
+│       └── style.css      # Custom CSS styling
+├── sample_inventory_data.json  # Sample data for reference
+└── README.md              # Documentation
 ```
+
+## 🔧 Configuration
+
+### Web Server Settings
+- **Host**: 0.0.0.0 (accessible from any IP)
+- **Port**: 5000
+- **Debug Mode**: Enabled in development
+
+### Security
+- Change the `secret_key` in `app.py` for production use
+- Consider using environment variables for sensitive configuration
 
 ## Contributing
 
