@@ -4,13 +4,13 @@ A comprehensive web-based inventory management system developed in Python (Flask
 
 ##  1. Project Overview
 
-This project is a web-based inventory management system developed in Python (Flask). It allows small business owners, such as shopkeepers or salon owners, to record purchases and sales, track available stock, and calculate total inventory value — all through a simple web interface.
+This project is a web-based inventory management system developed in Python (Flask). It allows small business owners, such as shopkeepers or salon owners, to record purchases and sales, track available stock, and calculate total inventory value all through a simple web interface.
 
 Currently, the system stores data in a JSON file, but it can be easily extended to use a database (e.g., SQLite, MySQL, or PostgreSQL) when handling larger volumes of data or multi-user access.
 
 ##  2. Problem Description
 
-Small businesses often manage their inventory manually — using paper records or spreadsheets. This approach creates several challenges:
+Small businesses often manage their inventory manually using paper records or spreadsheets. This approach creates several challenges:
 
 - Difficulty in tracking stock quantities accurately
 - Risk of data loss or calculation errors
