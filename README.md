@@ -2,13 +2,13 @@
 
 A comprehensive web-based inventory management system developed in Python (Flask) for small businesses.
 
-## 📘 1. Project Overview
+##  1. Project Overview
 
 This project is a web-based inventory management system developed in Python (Flask). It allows small business owners, such as shopkeepers or salon owners, to record purchases and sales, track available stock, and calculate total inventory value — all through a simple web interface.
 
 Currently, the system stores data in a JSON file, but it can be easily extended to use a database (e.g., SQLite, MySQL, or PostgreSQL) when handling larger volumes of data or multi-user access.
 
-## ⚙️ 2. Problem Description
+##  2. Problem Description
 
 Small businesses often manage their inventory manually — using paper records or spreadsheets. This approach creates several challenges:
 
@@ -19,7 +19,7 @@ Small businesses often manage their inventory manually — using paper records o
 
 These issues can lead to overstocking, undersupply, or loss of profit visibility.
 
-## 💡 3. How the Program Solves the Problem
+##  3. How the Program Solves the Problem
 
 This application simplifies inventory management by digitalizing the process:
 
@@ -30,7 +30,7 @@ This application simplifies inventory management by digitalizing the process:
 
 While simple, it demonstrates how automation replaces manual tracking with structured, error-free digital data.
 
-## 🔍 4. Aspects of the Problem Solved by the Program
+##  4. Aspects of the Problem Solved by the Program
 
 | Problem Aspect | How the Program Solves It |
 |----------------|---------------------------|
@@ -39,7 +39,7 @@ While simple, it demonstrates how automation replaces manual tracking with struc
 | No quick stock overview | Real-time product list and inventory summary |
 | Paper-based logs | Persistent data storage in a JSON file |
 
-## 🔄 5. How Solving the Problem Changes the Process
+##  5. How Solving the Problem Changes the Process
 
 | Old Process | New Process (Using the Program) |
 |-------------|----------------------------------|
@@ -48,7 +48,7 @@ While simple, it demonstrates how automation replaces manual tracking with struc
 | Separate files per day | Centralized, continuous record in JSON |
 | No alerts or feedback | Flash messages confirm each operation instantly |
 
-## 🧱 6. Requirements the Solution Places on the Program
+##  6. Requirements the Solution Places on the Program
 
 To achieve its functionality, the system must:
 
@@ -60,7 +60,7 @@ To achieve its functionality, the system must:
 
 **Scalability note:** If more users, data, or reporting features are added in the future, a database (like SQLite or MySQL) can replace the JSON storage for better performance and reliability.
 
-## 🧩 7. How the Program Changes the Original Operating Model
+##  7. How the Program Changes the Original Operating Model
 
 Originally, businesses manually updated notebooks or Excel sheets. Now, this program acts as a local digital assistant:
 
@@ -70,7 +70,7 @@ Originally, businesses manually updated notebooks or Excel sheets. Now, this pro
 
 This transition improves efficiency, accuracy, and visibility in day-to-day operations.
 
-## 🧰 8. Usage Scenarios
+##  8. Usage Scenarios
 
 The program is ideal for small-scale, local businesses such as:
 
@@ -81,7 +81,7 @@ The program is ideal for small-scale, local businesses such as:
 
 It is especially useful where database setup would be too complex or unnecessary. However, if the business grows, it can easily migrate to a database-based model.
 
-## 🌐 9. Technical Requirements and Execution
+##  9. Technical Requirements and Execution
 
 | Requirement | Description |
 |-------------|-------------|
@@ -115,7 +115,7 @@ It is especially useful where database setup would be too complex or unnecessary
    http://localhost:5000
    ```
 
-## 🏗️ 10. Software Architecture
+##  10. Software Architecture
 
 The system uses a simple two-layer architecture:
 
@@ -135,7 +135,7 @@ Storage (JSON file)
 
 The architecture can later be extended to include a database layer for advanced data management. This structure is chosen for clarity, simplicity, and easy explanation — perfect for educational and small-scale use.
 
-## 🧪 11. Ensuring Correct Functioning
+##  11. Ensuring Correct Functioning
 
 The following design choices help maintain reliability:
 
@@ -150,7 +150,7 @@ The following design choices help maintain reliability:
 - Performing sales and confirming that quantities and totals update correctly
 - Restarting the app to ensure data persistence through JSON
 
-## 🧭 12. Usability Considerations
+##  12. Usability Considerations
 
 The system emphasizes simplicity and clarity:
 
@@ -161,7 +161,7 @@ The system emphasizes simplicity and clarity:
 
 Even a non-technical user (like a small business owner) can operate it with no prior training.
 
-## 🧠 13. How to Use the Program
+##  13. How to Use the Program
 
 1. **Start the app** using `python app.py`
 2. **Open the browser** at `http://localhost:5000`
@@ -171,16 +171,16 @@ Even a non-technical user (like a small business owner) can operate it with no p
    - **View Inventory**: See all products, total items, and total value
 4. **The app automatically saves** changes in `inventory_data.json`
 
-## ✨ Features
+##  Features
 
-- 📊 **View Inventory**: Interactive dashboard with real-time statistics
-- 📥 **Record Purchases**: Smart forms for adding products and stock
-- 📤 **Process Sales**: Automated inventory updates with validation
-- 📱 **Mobile Friendly**: Responsive design works on all devices
-- 💾 **Data Persistence**: Automatic saving to JSON database
-- 🎨 **Modern UI**: Professional interface with Bootstrap styling
+-  **View Inventory**: Interactive dashboard with real-time statistics
+-  **Record Purchases**: Smart forms for adding products and stock
+-  **Process Sales**: Automated inventory updates with validation
+-  **Mobile Friendly**: Responsive design works on all devices
+-  **Data Persistence**: Automatic saving to JSON database
+-  **Modern UI**: Professional interface with Bootstrap styling
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 inventory-management-system/
@@ -198,7 +198,7 @@ inventory-management-system/
 └── README.md                  # Documentation
 ```
 
-## 🚀 14. Future Improvements
+##  14. Future Improvements
 
 While this version focuses on simplicity, it can be expanded with:
 
@@ -209,7 +209,7 @@ While this version focuses on simplicity, it can be expanded with:
 - **Export options** (CSV or Excel report generation)
 - **Cloud-based deployment** for remote access
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 - **Backend**: Python Flask
 - **Frontend**: HTML5, CSS3, JavaScript
@@ -217,16 +217,16 @@ While this version focuses on simplicity, it can be expanded with:
 - **Database**: JSON file storage
 - **Real-time**: AJAX for dynamic updates
 
-## 👩‍💻 15. Author
+##  15. Author
 
 **Kanchana Madushani**  
 ERP Student – Centria University of Applied Sciences
 
-## 📄 License
+##  License
 
 This project is open source and available under the MIT License.
 
-## 🤝 Contributing
+##  Contributing
 
 Feel free to submit issues, fork the repository, and create pull requests for any improvements.
 
