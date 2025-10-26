@@ -267,3 +267,146 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+/* Mobile-Specific Styles */
+@media (max-width: 768px) {
+    /* Improved touch targets */
+    .btn {
+        min-height: 44px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .form-control, .form-select {
+        min-height: 44px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    /* Better spacing on mobile */
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Card improvements */
+    .card {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    /* Navigation improvements */
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .navbar-collapse {
+        margin-top: 0.5rem;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 1rem;
+        border-radius: 5px;
+        margin: 0.2rem 0;
+    }
+    
+    .nav-link:hover, .nav-link:focus {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: none; /* Remove transform on mobile for better performance */
+    }
+    
+    /* Table improvements */
+    .table-responsive {
+        border-radius: 8px;
+    }
+    
+    /* Form improvements */
+    .input-group-text {
+        min-width: 44px;
+        justify-content: center;
+    }
+    
+    /* Statistics cards mobile layout */
+    .row.g-3 > .col-6 {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Mobile card layout for inventory */
+    .mobile-product-card {
+        border-left: 4px solid #007bff;
+        transition: all 0.2s ease;
+    }
+    
+    .mobile-product-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Footer adjustments */
+    footer {
+        padding: 1rem 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Reduce margins on mobile */
+    .mt-4 {
+        margin-top: 1.5rem !important;
+    }
+    
+    .mb-4 {
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+/* Small mobile devices (phones in portrait) */
+@media (max-width: 576px) {
+    .h2, h2 {
+        font-size: 1.5rem;
+    }
+    
+    .h4, h4 {
+        font-size: 1.2rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    /* Stack buttons vertically on very small screens */
+    .d-grid.gap-2.d-md-flex {
+        display: grid !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* Adjust card statistics text */
+    .card h4 {
+        font-size: 1.5rem;
+    }
+    
+    .card h6 {
+        font-size: 0.9rem;
+    }
+    
+    /* Make product selection easier on mobile */
+    select.form-control option {
+        padding: 10px;
+    }
+}
+
+/* Landscape orientation optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+    .navbar {
+        padding: 0.25rem 0;
+    }
+    
+    .mt-4 {
+        margin-top: 1rem !important;
+    }
+    
+    .card-body {
+        padding: 0.75rem;
+    }
+}

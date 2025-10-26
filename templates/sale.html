@@ -12,7 +12,7 @@
 
 {% if available_products %}
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-12 col-lg-8 mb-4">
         <div class="card">
             <div class="card-header">
                 <h5><i class="fas fa-shopping-cart"></i> Sale Form</h5>
@@ -39,11 +39,11 @@
                     <div id="productDetails" class="alert alert-info" style="display: none;">
                         <h6><i class="fas fa-info-circle"></i> Product Details</h6>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6">
                                 <p class="mb-1"><strong>Name:</strong> <span id="detailName"></span></p>
                                 <p class="mb-1"><strong>Available:</strong> <span id="detailQuantity"></span> <span id="detailUnit"></span></p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6">
                                 <p class="mb-1"><strong>Price per unit:</strong> $<span id="detailPrice"></span></p>
                                 <p class="mb-1"><strong>Total value:</strong> $<span id="detailTotalValue"></span></p>
                             </div>
@@ -69,11 +69,11 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-6">
                                     <p class="mb-1"><strong>Selling:</strong> <span id="calcQuantity"></span> <span id="calcUnit"></span></p>
                                     <p class="mb-1"><strong>Price per unit:</strong> $<span id="calcPrice"></span></p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-6">
                                     <p class="mb-1"><strong>Total Sale Value:</strong> <span class="h5 text-success">$<span id="calcTotal"></span></span></p>
                                     <p class="mb-1"><strong>Remaining stock:</strong> <span id="calcRemaining"></span> <span id="calcRemainingUnit"></span></p>
                                 </div>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
 
-                    <div class="d-grid gap-2">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-warning btn-lg" id="submitSale" disabled>
                             <i class="fas fa-shopping-cart"></i> Process Sale
                         </button>
@@ -94,7 +94,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-12 col-lg-4">
         <div class="card">
             <div class="card-header">
                 <h6><i class="fas fa-boxes"></i> Available Products</h6>
