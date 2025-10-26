@@ -24,6 +24,7 @@ class WebInventoryManager:
         """Initialize inventory manager and load existing data"""
         self.data_file = "inventory_data.json"
         self.load_data()
+        self.cleanup_decimal_precision()
     
     def load_data(self):
         """Load inventory data from JSON file"""
@@ -37,27 +38,40 @@ class WebInventoryManager:
             self.inventory = {}
     
     def save_data(self):
-        """Save inventory data to JSON file"""
+        """Save inventory data to JSON file with proper decimal formatting"""
+        # Ensure all numeric values are properly formatted before saving
+        for product_id, product in self.inventory.items():
+            if 'quantity' in product:
+                product['quantity'] = round(float(product['quantity']), 2)
+            if 'price' in product:
+                product['price'] = round(float(product['price']), 2)
+        
         with open(self.data_file, 'w') as file:
             json.dump(self.inventory, file, indent=2)
     
     def get_all_products(self):
-        """Return all products in inventory"""
+        """Return all products in inventory with properly formatted quantities"""
+        # Ensure all quantities are rounded to 2 decimal places
+        for product_id, product in self.inventory.items():
+            if 'quantity' in product:
+                product['quantity'] = round(float(product['quantity']), 2)
+            if 'price' in product:
+                product['price'] = round(float(product['price']), 2)
         return self.inventory
     
     def add_purchase(self, product_id, name=None, unit=None, price=None, quantity=None):
         """Add purchase to inventory - updates existing product or creates new one"""
         if product_id in self.inventory:
-            # Update existing product quantity
-            self.inventory[product_id]['quantity'] += float(quantity)
+            # Update existing product quantity with 2 decimal precision
+            self.inventory[product_id]['quantity'] = round(self.inventory[product_id]['quantity'] + float(quantity), 2)
             return f"Updated {self.inventory[product_id]['name']} - New quantity: {self.inventory[product_id]['quantity']} {self.inventory[product_id]['unit']}"
         else:
-            # Create new product entry
+            # Create new product entry with 2 decimal precision
             self.inventory[product_id] = {
                 'name': name,
                 'unit': unit,
-                'price': float(price),
-                'quantity': float(quantity)
+                'price': round(float(price), 2),
+                'quantity': round(float(quantity), 2)
             }
             return f"Added new product: {name}"
     
@@ -68,7 +82,7 @@ class WebInventoryManager:
             return False, "Product not found in inventory"
         
         product = self.inventory[product_id]
-        sale_quantity = float(quantity)
+        sale_quantity = round(float(quantity), 2)
         
         # Validate quantity
         if sale_quantity <= 0:
@@ -77,9 +91,9 @@ class WebInventoryManager:
         if sale_quantity > product['quantity']:
             return False, f"Insufficient stock! Available: {product['quantity']} {product['unit']}"
         
-        # Process sale
-        self.inventory[product_id]['quantity'] -= sale_quantity
-        total_sale_value = sale_quantity * product['price']
+        # Process sale with 2 decimal precision
+        self.inventory[product_id]['quantity'] = round(self.inventory[product_id]['quantity'] - sale_quantity, 2)
+        total_sale_value = round(sale_quantity * product['price'], 2)
         
         result_message = f"Sold: {sale_quantity} {product['unit']} of {product['name']} for ${total_sale_value:.2f}"
         
@@ -89,6 +103,29 @@ class WebInventoryManager:
             result_message += " (Product removed - quantity reached 0)"
         
         return True, result_message
+    
+    def cleanup_decimal_precision(self):
+        """Clean up any existing data with improper decimal precision"""
+        data_updated = False
+        for product_id, product in self.inventory.items():
+            if 'quantity' in product:
+                old_quantity = product['quantity']
+                new_quantity = round(float(old_quantity), 2)
+                if old_quantity != new_quantity:
+                    product['quantity'] = new_quantity
+                    data_updated = True
+            
+            if 'price' in product:
+                old_price = product['price']
+                new_price = round(float(old_price), 2)
+                if old_price != new_price:
+                    product['price'] = new_price
+                    data_updated = True
+        
+        # Save cleaned data
+        if data_updated:
+            self.save_data()
+            print("Data cleaned: Fixed decimal precision for existing products")
 
 # Create inventory manager instance
 inventory_manager = WebInventoryManager()

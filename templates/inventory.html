@@ -128,7 +128,7 @@
                         <td>${{ "%.2f"|format(product.price) }}</td>
                         <td>
                             <span class="badge {% if product.quantity < 10 %}bg-warning{% elif product.quantity < 5 %}bg-danger{% else %}bg-success{% endif %}">
-                                {{ product.quantity }}
+                                {{ "%.2f"|format(product.quantity) }}
                             </span>
                         </td>
                         <td>${{ "%.2f"|format(product.price * product.quantity) }}</td>

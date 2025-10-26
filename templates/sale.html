@@ -28,9 +28,9 @@
                                     data-name="{{ product.name }}"
                                     data-unit="{{ product.unit }}"
                                     data-price="{{ product.price }}"
-                                    data-quantity="{{ product.quantity }}"
+                                    data-quantity="{{ "%.2f"|format(product.quantity) }}"
                                     {% if request.args.get('product_id') == product_id %}selected{% endif %}>
-                                {{ product_id }} - {{ product.name }} ({{ product.quantity }} {{ product.unit }} available)
+                                {{ product_id }} - {{ product.name }} ({{ "%.2f"|format(product.quantity) }} {{ product.unit }} available)
                             </option>
                             {% endfor %}
                         </select>
@@ -106,7 +106,7 @@
                         <h6 class="card-title mb-1">{{ product.name }}</h6>
                         <small class="text-muted">
                             ID: {{ product_id }}<br>
-                            Stock: {{ product.quantity }} {{ product.unit }}<br>
+                            Stock: {{ "%.2f"|format(product.quantity) }} {{ product.unit }}<br>
                             Price: ${{ "%.2f"|format(product.price) }}<br>
                             Value: ${{ "%.2f"|format(product.price * product.quantity) }}
                         </small>
@@ -185,9 +185,9 @@ $(document).ready(function() {
             $('#detailName').text(name);
             $('#detailUnit, #saleUnit').text(unit);
             $('#detailPrice').text(price.toFixed(2));
-            $('#detailQuantity').text(quantity);
+            $('#detailQuantity').text(parseFloat(quantity).toFixed(2));
             $('#detailTotalValue').text(totalValue);
-            $('#maxQuantityText').text('Maximum available: ' + quantity + ' ' + unit);
+            $('#maxQuantityText').text('Maximum available: ' + parseFloat(quantity).toFixed(2) + ' ' + unit);
 
             $('#productDetails').show();
             $('#quantity').attr('max', quantity);

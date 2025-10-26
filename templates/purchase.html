@@ -115,7 +115,7 @@
                         <h6 class="card-title mb-1">{{ product.name }}</h6>
                         <small class="text-muted">
                             ID: {{ product_id }}<br>
-                            Stock: {{ product.quantity }} {{ product.unit }}<br>
+                            Stock: {{ "%.2f"|format(product.quantity) }} {{ product.unit }}<br>
                             Price: ${{ "%.2f"|format(product.price) }}
                         </small>
                         <button type="button" class="btn btn-sm btn-outline-primary mt-1 w-100 select-product" 
@@ -177,7 +177,7 @@ $(document).ready(function() {
                     $('#existingProductInfo').show();
                     $('#existingProductDetails').html(
                         '<strong>' + data.name + '</strong><br>' +
-                        'Current stock: ' + data.quantity + ' ' + data.unit + '<br>' +
+                        'Current stock: ' + parseFloat(data.quantity).toFixed(2) + ' ' + data.unit + '<br>' +
                         'Price: $' + data.price.toFixed(2) + ' per ' + data.unit
                     );
                     $('#newProductFields input, #newProductFields select').prop('required', false);
