@@ -129,18 +129,46 @@ body {
     color: #721c24;
 }
 
-/* Statistics Cards */
-.card.bg-info, .card.bg-success, .card.bg-warning {
+/* Statistics Cards - Enhanced visibility with solid colors */
+.card.bg-info {
     border: none;
-    background: linear-gradient(135deg, var(--bs-info), var(--bs-info-dark)) !important;
+    background: linear-gradient(135deg, #17a2b8, #138496) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
 }
 
 .card.bg-success {
-    background: linear-gradient(135deg, var(--bs-success), var(--bs-success-dark)) !important;
+    border: none;
+    background: linear-gradient(135deg, #28a745, #1e7e34) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
 
 .card.bg-warning {
-    background: linear-gradient(135deg, var(--bs-warning), var(--bs-warning-dark)) !important;
+    border: none;
+    background: linear-gradient(135deg, #ffc107, #e0a800) !important;
+    color: #212529 !important;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.card.bg-danger {
+    border: none;
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+/* Statistics card text styling */
+.card.bg-info h5, .card.bg-info h3,
+.card.bg-success h5, .card.bg-success h3,
+.card.bg-danger h5, .card.bg-danger h3 {
+    color: white !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.card.bg-warning h5, .card.bg-warning h3 {
+    color: #212529 !important;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 /* Product Items */

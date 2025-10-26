@@ -11,14 +11,16 @@
 </div>
 
 {% if products %}
+<!-- Statistics Cards with improved visibility -->
 <div class="row mb-3">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card bg-info text-white">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
                         <h5>Total Products</h5>
                         <h3>{{ total_products }}</h3>
+                        <small>Different Items</small>
                     </div>
                     <div>
                         <i class="fas fa-boxes fa-2x"></i>
@@ -27,13 +29,14 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card bg-success text-white">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
                         <h5>Total Value</h5>
                         <h3>${{ "%.2f"|format(total_value) }}</h3>
+                        <small>Inventory Worth</small>
                     </div>
                     <div>
                         <i class="fas fa-dollar-sign fa-2x"></i>
@@ -42,13 +45,16 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card bg-warning text-white">
+    {% set low_stock_items = products.values()|selectattr('quantity', 'lt', 10)|list %}
+    {% set critical_stock_items = products.values()|selectattr('quantity', 'lt', 5)|list %}
+    <div class="col-md-3">
+        <div class="card bg-warning">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
                         <h5>Low Stock Items</h5>
-                        <h3>{{ products.values()|selectattr('quantity', 'lt', 10)|list|length }}</h3>
+                        <h3>{{ low_stock_items|length }}</h3>
+                        <small>Below 10 units</small>
                     </div>
                     <div>
                         <i class="fas fa-exclamation-triangle fa-2x"></i>
@@ -57,7 +63,37 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5>Critical Stock</h5>
+                        <h3>{{ critical_stock_items|length }}</h3>
+                        <small>Below 5 units</small>
+                    </div>
+                    <div>
+                        <i class="fas fa-exclamation-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Low Stock Alert Section -->
+{% if low_stock_items|length > 0 %}
+<div class="alert alert-warning mb-3">
+    <h6><i class="fas fa-exclamation-triangle"></i> Stock Alert!</h6>
+    <p class="mb-0">
+        <strong>{{ low_stock_items|length }}</strong> items are running low on stock (below 10 units).
+        {% if critical_stock_items|length > 0 %}
+        <strong>{{ critical_stock_items|length }}</strong> items are critically low (below 5 units).
+        {% endif %}
+        Consider restocking soon to avoid running out.
+    </p>
+</div>
+{% endif %}
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">

@@ -101,14 +101,21 @@ def index():
 
 @app.route('/inventory')
 def view_inventory():
-    """Display inventory table with statistics"""
+    """Display inventory table with statistics including stock alerts"""
     products = inventory_manager.get_all_products()
     total_products = len(products)
     total_value = sum(p['price'] * p['quantity'] for p in products.values())
+    
+    # Calculate stock statistics
+    low_stock_count = sum(1 for p in products.values() if p['quantity'] < 10)
+    critical_stock_count = sum(1 for p in products.values() if p['quantity'] < 5)
+    
     return render_template('inventory.html', 
                          products=products, 
                          total_products=total_products,
-                         total_value=total_value)
+                         total_value=total_value,
+                         low_stock_count=low_stock_count,
+                         critical_stock_count=critical_stock_count)
 
 @app.route('/purchase', methods=['GET', 'POST'])
 def record_purchase():
