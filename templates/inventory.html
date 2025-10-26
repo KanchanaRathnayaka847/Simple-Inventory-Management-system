@@ -11,9 +11,9 @@
 </div>
 
 {% if products %}
-<!-- Statistics Cards with mobile-friendly layout -->
+<!-- Statistics Cards - 4 in one line on desktop, 2x2 on mobile -->
 <div class="row g-3 mb-4">
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-3">
         <div class="card bg-info text-white h-100">
             <div class="card-body text-center">
                 <i class="fas fa-boxes fa-2x mb-2"></i>
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-3">
         <div class="card bg-success text-white h-100">
             <div class="card-body text-center">
                 <i class="fas fa-dollar-sign fa-2x mb-2"></i>
@@ -33,16 +33,9 @@
             </div>
         </div>
     </div>
-                    <div>
-                        <i class="fas fa-dollar-sign fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     {% set low_stock_items = products.values()|selectattr('quantity', 'lt', 10)|list %}
     {% set critical_stock_items = products.values()|selectattr('quantity', 'lt', 5)|list %}
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-3">
         <div class="card bg-warning h-100">
             <div class="card-body text-center">
                 <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
@@ -52,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-3">
         <div class="card bg-danger text-white h-100">
             <div class="card-body text-center">
                 <i class="fas fa-exclamation-circle fa-2x mb-2"></i>
