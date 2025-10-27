@@ -87,9 +87,11 @@ It is especially useful where database setup would be too complex or unnecessary
 |-------------|-------------|
 | Language | Python 3 |
 | Framework | Flask |
+| Frontend | Bootstrap 5, HTML5, CSS3, JavaScript |
 | Storage | JSON file (inventory_data.json) |
 | Execution | Local server (localhost:5000) |
 | Hardware | Any device capable of running Python |
+| Compatibility | Desktop, Tablet, Mobile (responsive design) |
 | Deployment | Local only (no internet/server dependency) |
 
 ### Installation & Setup
@@ -176,9 +178,41 @@ Even a non-technical user (like a small business owner) can operate it with no p
 -  **View Inventory**: Interactive dashboard with real-time statistics
 -  **Record Purchases**: Smart forms for adding products and stock
 -  **Process Sales**: Automated inventory updates with validation
--  **Mobile Friendly**: Responsive design works on all devices
+-  **Mobile & Web Responsive**: Fully optimized for both desktop and mobile devices
 -  **Data Persistence**: Automatic saving to JSON database
 -  **Modern UI**: Professional interface with Bootstrap styling
+-  **Cross-Platform**: Works seamlessly on desktop, tablet, and mobile browsers
+
+##  Mobile Responsiveness
+
+This application is **fully optimized for mobile devices** with comprehensive responsive design features:
+
+### 📱 **Mobile-Optimized Interface**
+- **Responsive Navigation**: Collapsible hamburger menu for mobile devices
+- **Touch-Friendly Design**: All buttons and inputs sized for finger taps (44px minimum)
+- **Adaptive Layouts**: Content automatically adjusts to screen size
+
+### 🖥️ **Desktop vs Mobile Views**
+| Feature | Desktop View | Mobile View |
+|---------|-------------|-------------|
+| **Dashboard Cards** | 4 cards in one horizontal row | 2×2 grid layout |
+| **Inventory Table** | Full table with all columns | Card-based layout with essential info |
+| **Forms** | Two-column layouts | Single-column stacked forms |
+| **Navigation** | Full text menu items | Icons with condensed text |
+
+### 📲 **Mobile-Specific Features**
+- **Card-Based Product Display**: On mobile, inventory items show as easy-to-read cards
+- **Swipe-Friendly Interface**: Optimized for touch gestures
+- **Responsive Forms**: Input fields adapt to mobile keyboards
+- **iOS Compatibility**: Font sizes prevent unwanted zoom on iPhone/iPad
+- **Landscape Support**: Optimized for both portrait and landscape orientations
+
+### 💡 **How to Test Mobile View**
+1. **Desktop Browser**: Use Developer Tools (F12) → Device Toolbar
+2. **Real Mobile**: Access via your phone using the same network IP
+3. **Responsive Design**: Resize browser window to see automatic adaptations
+
+The application automatically detects your device and provides the optimal viewing experience!
 
 ## Project Structure
 
